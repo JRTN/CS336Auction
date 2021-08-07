@@ -1,6 +1,7 @@
 package com.russell.database;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 /**
  * Class that interacts directly with database. Responsible for establishing a connection to the database
@@ -58,6 +59,18 @@ public class ApplicationDAO {
         Statement stmt = connection.createStatement();
 
         return stmt.executeUpdate(query);
+    }
+
+    public static String getDateTimeString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return sdf.format(date);
+    }
+
+    public static String getDateString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        return sdf.format(date);
     }
 
 }
