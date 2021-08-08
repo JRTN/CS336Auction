@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AuctionLoadServlet extends HttpServlet {
+public class CreateAuctionServlet extends HttpServlet {
 
-    public AuctionLoadServlet() { super(); }
+    public CreateAuctionServlet() { super(); }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

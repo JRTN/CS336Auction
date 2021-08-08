@@ -7,6 +7,7 @@
 <html>
 <head>
     <title>Welcome Page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 <%
@@ -47,12 +48,14 @@
                 %>
 
                 <p class="card-text">
-                    ISBN: <a href="AuctionLoadServlet?auctionid=<%=auctionId%>"<%=isbn%>> Author: <%=author%> Price: <%=currentPrice%>
+                    ISBN: <a href="AuctionLoadServlet?auctionid=<%=auctionId%>"><%=isbn%></a> Author: <%=author%> Price: <%=currentPrice%>
                 </p>
                 <%} %>
+                <a href="createauction.jsp" class="btn btn-primary" role="button">Create New Auction</a>
             </div>
         </div>
     </div>
 </div>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -16,83 +16,20 @@ public class Book {
         }
     }
 
-    enum Genre {
-        ActionAndAdventure("Action and adventure"),
-        ArtArchitecture("Art/architecture"),
-        AlternateHistory("Alternate history"),
-        AutoBiography("Autobiography"),
-        Anthology("Anthology"),
-        Biography("Biography"),
-        ChickLit("Chick lit"),
-        BusinessEconomics("Business/economics"),
-        Childrens("Children's"),
-        CraftsHobbies("Crafts/hobbies"),
-        Classic("Classic"),
-        Cookbook("Cookbook"),
-        ComicBook("Comic book"),
-        Diary("Diary"),
-        ComingOfAge("Coming-of-age"),
-        Dictionary("Dictionary"),
-        Crime("Crime"),
-        Encyclopedia("Encyclopedia"),
-        Drama("Drama"),
-        Guide("Guide"),
-        FairyTale("Fairytale"),
-        HealthFitness("Health/fitness"),
-        Fantasy("Fantasy"),
-        History("History"),
-        GraphicNovel("Graphic novel"),
-        HomeAndGarden("Home and garden"),
-        HistoricalFiction("Historical fiction"),
-        Humor("Humor"),
-        Horror("Horror"),
-        Journal("Journal"),
-        Mystery("Mystery"),
-        Math("Math"),
-        ParanormalRomance("Paranormal romance"),
-        Memoir("Memoir"),
-        PictureBook("Picture book"),
-        Philosophy("Philosophy"),
-        Poetry("Poetry"),
-        Prayer("Prayer"),
-        PoliticalThriller("Political thriller"),
-        Religion("Religion"),
-        Spirituality("spirituality"),
-        Romance("Romance"),
-        Textbook("Textbook"),
-        Satire("Satire"),
-        ScienceFiction("Science fiction"),
-        Review("Review"),
-        ShortStory("Short story"),
-        Science("Science"),
-        Suspense("Suspense"),
-        SelfHelp("Self help"),
-        Thriller("Thriller"),
-        SportsAndLeisure("Sports and leisure"),
-        Western("Western"),
-        Travel("Travel"),
-        YoungAdult("Young adult"),
-        TrueCrime("True crime");
-
-        public final String genre;
-
-        Genre(String genre) {
-            this.genre = genre;
-        }
-    }
-
     private String isbn;
+    private String title;
     private SubCategory subcategory;
     private int pages;
     private String author;
     private String publisher;
-    private Genre genre;
+    private String genre;
     private Date publicationDate;
 
 
-    public Book(String isbn, SubCategory subcategory, int pages, String author,
-                String publisher, Genre genre, Date publicationDate) {
+    public Book(String isbn, String title, SubCategory subcategory, int pages, String author,
+                String publisher, String genre, Date publicationDate) {
         this.isbn = isbn;
+        this.title = title;
         this.subcategory = subcategory;
         this.pages = pages;
         this.author = author;
@@ -107,6 +44,14 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public SubCategory getSubcategory() {
@@ -141,11 +86,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
