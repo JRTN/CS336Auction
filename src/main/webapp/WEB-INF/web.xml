@@ -26,4 +26,14 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Servlet that handles loading the auction page</description>
+    <display-name>AuctionLoadServlet</display-name>
+    <servlet-name>AuctionLoadServlet</servlet-name>
+    <servlet-class>com.russell.web.servlets.AuctionLoadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuctionLoadServlet</servlet-name>
+    <url-pattern>/AuctionLoadServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

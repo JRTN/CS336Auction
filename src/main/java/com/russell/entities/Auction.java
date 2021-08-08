@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Auction {
 
+    private int auctionId;
     private Book item;
     private User userCreated;
     private User userWinner;
@@ -13,8 +14,9 @@ public class Auction {
     private Date openDate;
     private Date closeDate;
 
-    public Auction(Book item, User userCreated, double startPrice, double reservePrice,
+    public Auction(int auctionId, Book item, User userCreated, double startPrice, double reservePrice,
                    Date openDate, Date closeDate) {
+        this.auctionId = auctionId;
         this.item = item;
         this.userCreated = userCreated;
         this.userWinner = null;
@@ -23,6 +25,14 @@ public class Auction {
         this.currentPrice = startPrice;
         this.openDate = openDate;
         this.closeDate = closeDate;
+    }
+
+    public int getAuctionId() {
+        return auctionId;
+    }
+
+    public void setAuctionId(int auctionId) {
+        this.auctionId = auctionId;
     }
 
     public Book getItem() {
