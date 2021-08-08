@@ -9,28 +9,29 @@
 <html>
 <head>
     <title>Register Page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 </head>
 <body>
-<h1>Register Page</h1>
-<form action="RegisterServlet" method="post" id="form_register">
-    <label>
-        Username:
-        <input type="text" placeholder="Enter Username" id="txt_username" name="username" required>
-    </label>
-    <label>
-        Password:
-        <input type="text" placeholder="Enter Password" id="txt_password" name="password" required>
-    </label>
-    <label>
-        Email:
-        <input type="text" placeholder="Enter Email" id="txt_email" name="email" required>
-    </label>
-    <label>
-        Name:
-        <input type="text" placeholder="Enter Name" id="txt_name" name="name" required>
-    </label>
-    <button type="submit">Register</button>
-</form>
-<label style="color: #FF0000;" id="lbl_invalid">${createResult}</label>
+<div class="container" id="form_container">
+    <form class="row text-center" action="RegisterServlet" method="post" style="width:340px">
+        <h2 class="text-center">Register</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" required="required" id="txt_username" name="username">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Name" required="required" id="txt_name" name="name">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" required="required" id="txt_email" name="email">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" required="required" id="txt_password" name="password">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </div>
+        <label style="color: #FF0000;" id="lbl_invalid">${createResult}</label>
+    </form>
+</div>
 </body>
 </html>

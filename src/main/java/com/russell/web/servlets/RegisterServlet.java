@@ -1,12 +1,14 @@
 package com.russell.web.servlets;
 
 import com.russell.database.sqlcommands.UserTable;
+import com.russell.entities.User;
 import com.russell.web.WebError;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -26,15 +28,19 @@ public class RegisterServlet extends HttpServlet {
         String role = "USER";
 
 
-        boolean createUser = false;
+        User createdUser = null;
         try {
-            createUser = UserTable.CreateNewUser(username, password, email, name, role);
+            createdUser = UserTable.CreateNewUser(username, password, email, name, role);
         } catch (SQLException throwables) {
             WebError.errorPage(throwables, request, response);
+            return;
         }
 
-        if(createUser) {
-            request.setAttribute("createResult", "User successfully created.");
+        if(createdUser != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("currentUser", createdUser);
+            request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+            return;
         } else {
             request.setAttribute("createResult", "Failed to create user.");
         }

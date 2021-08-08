@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class UserTable {
 
-    public static boolean CreateNewUser(String username, String password, String email, String name, String role) throws SQLException {
+    public static User CreateNewUser(String username, String password, String email, String name, String role) throws SQLException {
         String queryNames = String.format(UserQueries.SELECT_ALL_NAMES, username);
         ResultSet nameCheck = ApplicationDAO.runSelectQuery(queryNames);
         LinkedList<String> nameList = new LinkedList<>();
@@ -20,13 +20,13 @@ public class UserTable {
         }
 
         if(!nameList.isEmpty()) {
-            return false;
+            return null;
         }
 
         String queryInsert = String.format(UserQueries.INSERT_NEWUSER, username, password, email, name, role);
         int rowsAffected = ApplicationDAO.runChangeQuery(queryInsert);
 
-        return rowsAffected == 1;
+        return LoginUser(username, password);
     }
 
     public static User LoginUser(String username, String password) throws SQLException {

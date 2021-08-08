@@ -4,21 +4,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login page</title>
+    <title>Login page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 </head>
 <body>
-    <h1>Login Page</h1>
-    <form action="LoginServlet" method="post" id="form_login">
-        <label>
-            Username:
-            <input type="text" placeholder="Enter Username" id="txt_username" name="username" required>
-        </label>
-        <label>
-            Password:
-            <input type="text" placeholder="Enter Password" id="txt_password" name="password" required>
-        </label>
-        <button type="submit">Login</button>
+<div class="container" id="form_container">
+    <form class="row text-center" action="LoginServlet" method="post" style="width:340px">
+        <h2 class="text-center">Log in</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" required="required" id="txt_username" name="username">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" required="required" id="txt_password" name="password">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </div>
+        <label style="color: #FF0000;" id="lbl_invalid">${invalidLogin}</label>
     </form>
-    <label style="color: #FF0000;" id="lbl_invalid">${invalidLogin}</label>
+</div>
+
 </body>
 </html>
