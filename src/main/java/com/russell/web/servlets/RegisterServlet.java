@@ -30,7 +30,11 @@ public class RegisterServlet extends HttpServlet {
 
         User createdUser = null;
         try {
-            createdUser = UserTable.CreateNewUser(username, password, email, name, role);
+            int rowsAffected = UserTable.CreateNewUser(username, password, email, name, role);
+            if(rowsAffected != 1) {
+                //error
+            }
+            createdUser = UserTable.LoginUser(username, password);
         } catch (SQLException throwables) {
             WebError.errorPage(throwables, request, response);
             return;

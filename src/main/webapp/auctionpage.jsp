@@ -1,28 +1,26 @@
 <%--
   Created by IntelliJ IDEA.
   User: John
-  Date: 8/7/2021
-  Time: 7:53 PM
+  Date: 8/8/2021
+  Time: 5:53 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Book Auction Landing</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <title>Title</title>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="welcome.jsp">Auction</a>
+        <a class="navbar-brand" href="index.jsp">Auction</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="welcome.jsp">Home</a>
+                    <a class="nav-link" aria-current="page" href="index.jsp">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="welcome.jsp">My Account</a>
@@ -39,16 +37,6 @@
     </div>
 </nav>
 
-<div class="row" id="title">
-    <h1 class="text-center">Book Auction</h1>
-</div>
-<div class="row" id="nav_buttons">
-    <div class="col-sm-12 text-center">
-        <a href="login.jsp" class="btn btn-primary">Login</a>
-        <a href="register.jsp" class="btn">Register</a>
-    </div>
-</div>
-
-<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <h1>Auction Display Page</h1>
 </body>
 </html>

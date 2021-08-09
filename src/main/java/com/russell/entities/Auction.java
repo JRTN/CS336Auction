@@ -5,24 +5,24 @@ import java.util.Date;
 public class Auction {
 
     private int auctionId;
-    private Book item;
-    private User userCreated;
-    private User userWinner;
+    private String item;
+    private String userCreated;
+    private String userWinner;
     private double startPrice;
     private double reservePrice;
     private double currentPrice;
     private Date openDate;
     private Date closeDate;
 
-    public Auction(int auctionId, Book item, User userCreated, double startPrice, double reservePrice,
+    public Auction(int auctionId, String item, String userCreated, String userWinner, double startPrice, double reservePrice, double currentPrice,
                    Date openDate, Date closeDate) {
         this.auctionId = auctionId;
         this.item = item;
         this.userCreated = userCreated;
-        this.userWinner = null;
+        this.userWinner = userWinner;
         this.startPrice = startPrice;
         this.reservePrice = reservePrice;
-        this.currentPrice = startPrice;
+        this.currentPrice = currentPrice;
         this.openDate = openDate;
         this.closeDate = closeDate;
     }
@@ -35,27 +35,27 @@ public class Auction {
         this.auctionId = auctionId;
     }
 
-    public Book getItem() {
+    public String getItem() {
         return item;
     }
 
-    public void setItem(Book item) {
+    public void setItem(String item) {
         this.item = item;
     }
 
-    public User getUserCreated() {
+    public String getUserCreated() {
         return userCreated;
     }
 
-    public void setUserCreated(User userCreated) {
+    public void setUserCreated(String userCreated) {
         this.userCreated = userCreated;
     }
 
-    public User getUserWinner() {
+    public String getUserWinner() {
         return userWinner;
     }
 
-    public void setUserWinner(User userWinner) {
+    public void setUserWinner(String userWinner) {
         this.userWinner = userWinner;
     }
 

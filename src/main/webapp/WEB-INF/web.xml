@@ -40,7 +40,7 @@
     <description>Servlet that handles creating the auction</description>
     <display-name>CreateAuctionServlet</display-name>
     <servlet-name>CreateAuctionServlet</servlet-name>
-    <servlet-class>com.russell.web.servlets.AuctionLoadServlet</servlet-class>
+    <servlet-class>com.russell.web.servlets.CreateAuctionServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CreateAuctionServlet</servlet-name>

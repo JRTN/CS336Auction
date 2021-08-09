@@ -4,15 +4,13 @@ import java.util.Date;
 
 public class Book {
 
-    enum SubCategory {
-        FICTION("FICTION"),
-        NONFICTION("NONFICTION"),
-        MAGAZINE("MAGAZINE");
+    public enum SubCategory {
+        FICTION,
+        NONFICTION,
+        MAGAZINE;
 
-        public final String category;
+        SubCategory() {
 
-        SubCategory(String category) {
-            this.category = category;
         }
     }
 

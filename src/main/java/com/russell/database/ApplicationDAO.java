@@ -61,13 +61,13 @@ public class ApplicationDAO {
         return stmt.executeUpdate(query);
     }
 
-    public static String getDateTimeString(Date date) {
+    public static String getDateTimeString(java.util.Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         return sdf.format(date);
     }
 
-    public static String getDateString(Date date) {
+    public static String getDateString(java.util.Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         return sdf.format(date);
