@@ -11,11 +11,11 @@ import java.util.Date;
 public class BookTable {
 
     public static int createNewBook(String isbn, String title, String subcategory, int pages, String author,
-                                     String publisher, String genre, Date publicationDate) throws SQLException {
+                                    String publisher, String genre, Date publicationDate) throws SQLException {
 
 
         String queryInsert = String.format(BookQueries.INSERT_NEWBOOK, isbn, title, subcategory, pages, author,
-                                            publisher, genre, ApplicationDAO.getDateString(publicationDate));
+                publisher, genre, ApplicationDAO.getDateString(publicationDate));
 
         return ApplicationDAO.runChangeQuery(queryInsert);
     }
@@ -25,7 +25,7 @@ public class BookTable {
         ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
 
         Book result = null;
-        while(resultSet.next() && result == null) {
+        while (resultSet.next() && result == null) {
             String title = resultSet.getString("title");
             Book.SubCategory subcategory = Book.SubCategory.valueOf(resultSet.getString("subcategory"));
             int pages = resultSet.getInt("pages");

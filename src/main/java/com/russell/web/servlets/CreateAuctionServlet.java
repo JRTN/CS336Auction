@@ -18,7 +18,9 @@ import java.util.Date;
 
 public class CreateAuctionServlet extends HttpServlet {
 
-    public CreateAuctionServlet() { super(); }
+    public CreateAuctionServlet() {
+        super();
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,7 +55,7 @@ public class CreateAuctionServlet extends HttpServlet {
 
         User creatingUser = (User) request.getSession().getAttribute("currentUser");
 
-        if(creatingUser == null) {
+        if (creatingUser == null) {
             //error
             return;
         }
@@ -62,12 +64,12 @@ public class CreateAuctionServlet extends HttpServlet {
             int bookResult = BookTable.createNewBook(isbn, title, subcategory, pages, author, publisher, genre, publicationDate);
             int auctionResult = AuctionTable.CreateNewAuction(isbn, creatingUser.getUsername(), startPrice, reservePrice, closeDate);
 
-            if(bookResult != 1) {
+            if (bookResult != 1) {
                 request.setAttribute("createResult", "Failed to create book. This book may already exist.");
                 request.getRequestDispatcher("/createauction.jsp").forward(request, response);
                 return;
             }
-            if(auctionResult != 1) {
+            if (auctionResult != 1) {
                 request.setAttribute("createResult", "Failed to create auction.");
                 request.getRequestDispatcher("/createauction.jsp").forward(request, response);
                 return;

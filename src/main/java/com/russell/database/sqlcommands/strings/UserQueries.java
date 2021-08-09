@@ -7,9 +7,9 @@ public interface UserQueries {
 
     /* INSERT STRINGS  */
     String INSERT_NEWUSER = "INSERT INTO users" +
-                                "(username, userpass, useremail, irlname, userrole)" +
-                            "VALUES" +
-                                "('%s', '%s', '%s', '%s', '%s');";
+            "(username, userpass, useremail, irlname, userrole)" +
+            "VALUES" +
+            "('%s', '%s', '%s', '%s', '%s');";
 
     /* UPDATE STRINGS */
 

@@ -1,7 +1,7 @@
 package com.russell.web.servlets;
 
-import com.russell.entities.User;
 import com.russell.database.sqlcommands.UserTable;
+import com.russell.entities.User;
 import com.russell.web.WebError;
 
 import javax.servlet.ServletException;

@@ -31,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
         User createdUser = null;
         try {
             int rowsAffected = UserTable.CreateNewUser(username, password, email, name, role);
-            if(rowsAffected != 1) {
+            if (rowsAffected != 1) {
                 //error
             }
             createdUser = UserTable.LoginUser(username, password);
@@ -40,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        if(createdUser != null) {
+        if (createdUser != null) {
             HttpSession session = request.getSession();
             session.setAttribute("currentUser", createdUser);
             request.getRequestDispatcher("/welcome.jsp").forward(request, response);

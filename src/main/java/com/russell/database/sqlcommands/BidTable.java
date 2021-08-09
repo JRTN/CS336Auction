@@ -18,7 +18,7 @@ public class BidTable {
 
         ArrayList<Bid> bids = new ArrayList<>();
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             int auction_id = resultSet.getInt("auction_id");
             String username_bidder = resultSet.getString("username_bidder");
             double amount = resultSet.getDouble("amount");
@@ -39,7 +39,7 @@ public class BidTable {
 
         ArrayList<Bid> bids = new ArrayList<>();
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             int auction_id = resultSet.getInt("auction_id");
             String username_bidder = resultSet.getString("username_bidder");
             double amount = resultSet.getDouble("amount");

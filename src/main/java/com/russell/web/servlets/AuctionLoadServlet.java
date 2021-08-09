@@ -8,7 +8,9 @@ import java.io.IOException;
 
 public class AuctionLoadServlet extends HttpServlet {
 
-    public AuctionLoadServlet() { super(); }
+    public AuctionLoadServlet() {
+        super();
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

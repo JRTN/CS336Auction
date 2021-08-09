@@ -1,11 +1,11 @@
-        <%@ page import="com.russell.entities.Auction" %>
+<%@ page import="com.russell.entities.Auction" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.russell.database.sqlcommands.AuctionTable" %>
 <%@ page import="com.russell.entities.User" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="com.russell.web.WebError" %>
-        <%@ page import="com.russell.entities.Book" %>
-        <%@ page import="com.russell.database.sqlcommands.BookTable" %><%--
+<%@ page import="com.russell.entities.Book" %>
+<%@ page import="com.russell.database.sqlcommands.BookTable" %><%--
   Created by IntelliJ IDEA.
   User: John
   Date: 8/7/2021
@@ -21,7 +21,6 @@
 <body>
 
 <%
-
     ArrayList<Auction> auctions;
     try {
         auctions = AuctionTable.getAllActions();
@@ -32,26 +31,42 @@
 
 %>
 
+<%
+    User currentUser = (User) session.getAttribute("currentUser");
+%>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="welcome.jsp">Auction</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.jsp">Auction</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="welcome.jsp">Home</a>
+                    <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
                 </li>
                 <li class="nav-item">
+                    <%
+                        if (currentUser != null) {
+                    %>
                     <a class="nav-link" href="welcome.jsp">My Account</a>
+                    <%
+                    } else {
+                    %>
+                    <a class="nav-link" href="login.jsp">Login</a>
+                    <%
+                        }
+                    %>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="createauction.jsp">Create Auction</a>
                 </li>
             </ul>
             <form class="d-flex" action="auctionpage.jsp">
-                <input class="form-control me-2" type="search" placeholder="Search Auction" aria-label="Search" name="auctionid">
+                <input class="form-control me-2" type="search" placeholder="Search Auction" aria-label="Search"
+                       name="auctionid">
                 <button class="btn btn-secondary" type="submit">Search</button>
             </form>
         </div>
@@ -61,21 +76,6 @@
 <div class="row" id="title">
     <h1 class="text-center">Book Auction</h1>
 </div>
-
-<%
-    if (session.getAttribute("currentUser") == null) {
-%>
-
-<div class="row" id="nav_buttons">
-    <div class="col-sm-12 text-center">
-        <a href="login.jsp" class="btn btn-primary">Login</a>
-        <a href="register.jsp" class="btn">Register</a>
-    </div>
-</div>
-
-<%
-    }
-%>
 
 <%
     for (Auction auction : auctions) {
@@ -91,9 +91,12 @@
 <div class="card p-3">
     <div class="d-flex align-items-center">
         <div class="card-body">
-            <a href="auctionpage.jsp?auctionid=<%=auction.getAuctionId()%>"><h2 class="card-title"><%=book.getTitle()%></h2></a>
-            <p class="card-text">Price: $<%=String.format("%.2f", auction.getCurrentPrice())%></p>
-            <p class="card-text">Seller: <%=auction.getUserCreated()%></p>
+            <a href="auctionpage.jsp?auctionid=<%=auction.getAuctionId()%>"><h2 class="card-title"><%=book.getTitle()%>
+            </h2></a>
+            <p class="card-text">Price: $<%=String.format("%.2f", auction.getCurrentPrice())%>
+            </p>
+            <p class="card-text">Seller: <%=auction.getUserCreated()%>
+            </p>
         </div>
     </div>
 </div>

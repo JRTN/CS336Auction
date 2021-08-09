@@ -1,8 +1,8 @@
 package com.russell.database.sqlcommands;
 
-import com.russell.entities.User;
 import com.russell.database.ApplicationDAO;
 import com.russell.database.sqlcommands.strings.UserQueries;
+import com.russell.entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,11 +15,11 @@ public class UserTable {
         ResultSet nameCheck = ApplicationDAO.runSelectQuery(queryNames);
         LinkedList<String> nameList = new LinkedList<>();
 
-        while(nameCheck.next()) {
+        while (nameCheck.next()) {
             nameList.add(nameCheck.getString("username"));
         }
 
-        if(!nameList.isEmpty()) {
+        if (!nameList.isEmpty()) {
             return -1;
         }
 
