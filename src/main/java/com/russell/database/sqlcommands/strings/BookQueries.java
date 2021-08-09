@@ -8,4 +8,6 @@ public interface BookQueries {
                             "VALUES" +
                                 "('%s', '%s', '%s', %d, '%s', '%s', '%s', '%s');";
 
+    String GET_BYISBN = "SELECT * FROM book WHERE isbn = '%s';";
+
 }
