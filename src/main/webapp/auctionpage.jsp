@@ -3,7 +3,11 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="com.russell.web.WebError" %>
 <%@ page import="com.russell.entities.Book" %>
-<%@ page import="com.russell.database.sqlcommands.BookTable" %><%--
+<%@ page import="com.russell.database.sqlcommands.BookTable" %>
+<%@ page import="com.russell.entities.Bid" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.russell.database.sqlcommands.BidTable" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: John
   Date: 8/8/2021
@@ -28,6 +32,12 @@
         WebError.errorPage(throwables, request, response);
         return;
     }
+
+    if(auction == null) {
+        request.getRequestDispatcher("/notfound.jsp").forward(request, response);
+        return;
+    }
+
     Book book;
 
     try {
@@ -37,7 +47,18 @@
         return;
     }
 
+    if(book == null) {
+        request.getRequestDispatcher("/notfound.jsp").forward(request, response);
+        return;
+    }
 
+    ArrayList<Bid> bids;
+    try {
+        bids = BidTable.getByAuctionId(auction.getAuctionId());
+    } catch (SQLException throwables) {
+        WebError.errorPage(throwables, request, response);
+        return;
+    }
 
 %>
 
@@ -93,13 +114,16 @@
                 <h2 class="card-title">Bids</h2>
                 <%
                     //Loop over bids
+                    for(Bid bid : bids) {
+                        String username = bid.getUserBidder();
+                        double amount = bid.getAmount();
+                        Date placedDate = bid.getPlacedDate();
                 %>
-
                 <p class="card-text">
-                    <% //Display Bids %>
+                    <%=username %> Amount: <%=String.format("%.2f", amount)%> Placed: <%=placedDate %>
                 </p>
-                <%//} %>
-                <a href="placebid.jsp?auctionid=<% //auctionid %>" class="btn btn-primary" role="button">Place Bid</a>
+                <%} %>
+                <a href="placebid.jsp?auctionid=<%=auctionId %>" class="btn btn-primary" role="button">Place Bid</a>
             </div>
         </div>
     </div>

@@ -40,7 +40,7 @@
                     <a class="nav-link" href="createauction.jsp">Create Auction</a>
                 </li>
             </ul>
-            <form class="d-flex" action="AuctionLoadServlet">
+            <form class="d-flex" action="auctionpage.jsp">
                 <input class="form-control me-2" type="search" placeholder="Search Auction" aria-label="Search" name="auctionid">
                 <button class="btn btn-secondary" type="submit">Search</button>
             </form>

@@ -1,4 +1,11 @@
-<%--
+        <%@ page import="com.russell.entities.Auction" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.russell.database.sqlcommands.AuctionTable" %>
+<%@ page import="com.russell.entities.User" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="com.russell.web.WebError" %>
+        <%@ page import="com.russell.entities.Book" %>
+        <%@ page import="com.russell.database.sqlcommands.BookTable" %><%--
   Created by IntelliJ IDEA.
   User: John
   Date: 8/7/2021
@@ -12,6 +19,18 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
 <body>
+
+<%
+
+    ArrayList<Auction> auctions;
+    try {
+        auctions = AuctionTable.getAllActions();
+    } catch (SQLException throwables) {
+        WebError.errorPage(throwables, request, response);
+        return;
+    }
+
+%>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
@@ -31,7 +50,7 @@
                     <a class="nav-link" href="createauction.jsp">Create Auction</a>
                 </li>
             </ul>
-            <form class="d-flex" action="AuctionLoadServlet">
+            <form class="d-flex" action="auctionpage.jsp">
                 <input class="form-control me-2" type="search" placeholder="Search Auction" aria-label="Search" name="auctionid">
                 <button class="btn btn-secondary" type="submit">Search</button>
             </form>
@@ -42,12 +61,46 @@
 <div class="row" id="title">
     <h1 class="text-center">Book Auction</h1>
 </div>
+
+<%
+    if (session.getAttribute("currentUser") == null) {
+%>
+
 <div class="row" id="nav_buttons">
     <div class="col-sm-12 text-center">
         <a href="login.jsp" class="btn btn-primary">Login</a>
         <a href="register.jsp" class="btn">Register</a>
     </div>
 </div>
+
+<%
+    }
+%>
+
+<%
+    for (Auction auction : auctions) {
+        Book book;
+        try {
+            book = BookTable.getByIsbn(auction.getItem());
+        } catch (SQLException throwables) {
+            WebError.errorPage(throwables, request, response);
+            return;
+        }
+%>
+
+<div class="card p-3">
+    <div class="d-flex align-items-center">
+        <div class="card-body">
+            <a href="auctionpage.jsp?auctionid=<%=auction.getAuctionId()%>"><h2 class="card-title"><%=book.getTitle()%></h2></a>
+            <p class="card-text">Price: $<%=String.format("%.2f", auction.getCurrentPrice())%></p>
+            <p class="card-text">Seller: <%=auction.getUserCreated()%></p>
+        </div>
+    </div>
+</div>
+
+<%
+    }
+%>
 
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
