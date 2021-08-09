@@ -7,6 +7,8 @@ public interface AuctionQueries {
             "VALUES" +
             "('%s', '%s', '%f', '%f', '%f', '%s', '%s');";
 
+    String UPDATE_CURRENTPRICE = "UPDATE auction SET current_price = %f WHERE auction_id = %d;";
+
     String GET_BYISBN = "SELECT * FROM auction " +
             "WHERE item_isbn = '%s';";
 

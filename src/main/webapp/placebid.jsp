@@ -1,4 +1,8 @@
-<%@ page import="com.russell.entities.User" %><%--
+<%@ page import="com.russell.entities.User" %>
+<%@ page import="com.russell.entities.Auction" %>
+<%@ page import="com.russell.database.sqlcommands.AuctionTable" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="com.russell.web.WebError" %><%--
   Created by IntelliJ IDEA.
   User: John
   Date: 8/8/2021
@@ -8,12 +12,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Place Bid</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 <%
     User currentUser = (User) session.getAttribute("currentUser");
     int auctionId = Integer.parseInt(request.getParameter("auctionid"));
+    Auction auction;
+    try {
+        auction = AuctionTable.getById(auctionId);
+    } catch (SQLException throwables) {
+        WebError.errorPage(throwables, request, response);
+        return;
+    }
+
+    if(auction == null) {
+        request.getRequestDispatcher("/notfound.jsp").forward(request, response);
+        return;
+    }
+
+    session.setAttribute("currentAuction", auction);
 %>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -54,6 +73,37 @@
     </div>
 </nav>
 
-
+<div class="container-fluid h-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <form class="row text-center" action="PlaceBidServlet" method="post" style="width:340px">
+                <h1 class="text-center">Place Bid [Auction <%=auctionId%>]</h1>
+                <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Amount" required="required" id="num_amount"
+                           name="bid_amount">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Increment(Optional)"
+                           id="num_increment" name="bid_increment">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Maximum(Optional)"
+                           id="num_maximum" name="bid_maximum">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="chk_auto_increment" name="auto_increment">
+                    <label class="form-check-label" for="chk_auto_increment">
+                        Auto bid?
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Place</button>
+                </div>
+                <label style="color: #FF0000;" id="lbl_invalid">${createResult}</label>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

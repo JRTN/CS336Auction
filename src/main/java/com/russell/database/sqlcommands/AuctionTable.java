@@ -71,6 +71,12 @@ public class AuctionTable {
         return ApplicationDAO.runChangeQuery(queryInsert);
     }
 
+    public static int updateAuctionPrice(int auctionId, double amount) throws SQLException {
+        String queryUpdate = String.format(AuctionQueries.UPDATE_CURRENTPRICE, amount, auctionId);
+
+        return ApplicationDAO.runChangeQuery(queryUpdate);
+    }
+
     public static Auction getByIsbn(String isbn) throws SQLException {
         String query = String.format(AuctionQueries.GET_BYISBN, isbn);
         ResultSet resultSet = ApplicationDAO.runSelectQuery(query);

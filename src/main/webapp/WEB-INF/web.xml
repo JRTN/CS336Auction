@@ -46,4 +46,14 @@
         <servlet-name>CreateAuctionServlet</servlet-name>
         <url-pattern>/CreateAuctionServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description>Servlet that handles placing bids</description>
+        <display-name>PlaceBidServlet</display-name>
+        <servlet-name>PlaceBidServlet</servlet-name>
+        <servlet-class>com.russell.web.servlets.PlaceBidServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PlaceBidServlet</servlet-name>
+        <url-pattern>/PlaceBidServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

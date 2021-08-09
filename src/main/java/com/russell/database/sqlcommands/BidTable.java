@@ -54,7 +54,7 @@ public class BidTable {
     }
 
     public static int createNewBid(int auctionId, String usernameBidder, double amount, Date placedDate) throws SQLException {
-        String insertQuery = String.format(BidQueries.INSERT_NEWBID, auctionId, usernameBidder, amount, placedDate);
+        String insertQuery = String.format(BidQueries.INSERT_NEWBID, auctionId, usernameBidder, amount, ApplicationDAO.getDateTimeString(placedDate));
 
         return ApplicationDAO.runChangeQuery(insertQuery);
     }
