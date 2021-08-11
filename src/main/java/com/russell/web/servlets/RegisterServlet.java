@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
         if (createdUser != null) {
             HttpSession session = request.getSession();
             session.setAttribute("currentUser", createdUser);
-            request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+            request.getRequestDispatcher("/myaccount.jsp").forward(request, response);
             return;
         } else {
             request.setAttribute("createResult", "Failed to create user.");

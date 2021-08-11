@@ -19,6 +19,26 @@ public class BidAlertTable {
         return ApplicationDAO.runChangeQuery(insertQuery);
     }
 
+    public static int setTriggerForBid(int bidId, int val) throws SQLException {
+        String updateQuery = String.format(BidAlertQueries.TRIGGER_BYBIDID, bidId, val);
+
+        return ApplicationDAO.runChangeQuery(updateQuery);
+    }
+
+    public static ArrayList<BidAlert> getByUsername(String username) throws SQLException {
+        String query = String.format(BidAlertQueries.GET_BYUSERNAME, username);
+        ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
+
+        return getFromResultSet(resultSet);
+    }
+
+    public static ArrayList<BidAlert> getByAuctionId(int auctionId) throws SQLException {
+        String query = String.format(BidAlertQueries.GET_BYAUCTIONID, auctionId);
+        ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
+
+        return getFromResultSet(resultSet);
+    }
+
     public static ArrayList<BidAlert> getFromResultSet(ResultSet set) throws SQLException {
         ArrayList<BidAlert> results = new ArrayList<>();
         while(set.next()) {

@@ -42,7 +42,7 @@
                     <%
                         if (currentUser != null) {
                     %>
-                    <a class="nav-link active" href="welcome.jsp">My Account</a>
+                    <a class="nav-link active" href="myaccount.jsp">My Account</a>
                     <%
                     } else {
                     %>

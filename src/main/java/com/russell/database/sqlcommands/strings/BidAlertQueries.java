@@ -10,4 +10,6 @@ public interface BidAlertQueries {
                                     "(auction_id, bid_id, username, created_date, triggered) " +
                                 "VALUES " +
                                     "(%d, %d, '%s', '%s', %d);";
+
+    String TRIGGER_BYBIDID = "UPDATE bid_alert SET triggered = %d WHERE bid_id = %d;";
 }

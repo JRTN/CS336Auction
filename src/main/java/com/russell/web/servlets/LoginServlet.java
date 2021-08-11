@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println("Username/password combo matches");
             HttpSession session = request.getSession();
             session.setAttribute("currentUser", user);
-            request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+            request.getRequestDispatcher("/myaccount.jsp").forward(request, response);
         }
     }
 
