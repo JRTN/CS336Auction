@@ -13,50 +13,16 @@ import java.util.Date;
 public class AuctionTable {
 
     public static ArrayList<Auction> getAllActions() throws SQLException {
-        ArrayList<Auction> auctions = new ArrayList<>();
         ResultSet resultSet = ApplicationDAO.runSelectQuery(AuctionQueries.GET_ALLAUCTIONS);
 
-        while (resultSet.next()) {
-            int auction_id = resultSet.getInt("auction_id");
-            String item_isbn = resultSet.getString("item_isbn");
-            String username_created = resultSet.getString("username_created");
-            String username_won = resultSet.getString("username_won");
-            double start_price = resultSet.getDouble("start_price");
-            double reserve_price = resultSet.getDouble("reserve_price");
-            double current_price = resultSet.getDouble("current_price");
-            Date open_date = resultSet.getDate("open_date");
-            Date close_date = resultSet.getDate("close_date");
-
-            Auction auction = new Auction(auction_id, item_isbn, username_created, username_won, start_price, reserve_price, current_price, open_date, close_date);
-
-            auctions.add(auction);
-        }
-
-        return auctions;
+        return getFromResultSet(resultSet);
     }
 
     public static ArrayList<Auction> getForUser(User user) throws SQLException {
-        ArrayList<Auction> auctions = new ArrayList<>();
         String query = String.format(AuctionQueries.GET_BYUSERCREATED, user.getUsername());
         ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
 
-        while (resultSet.next()) {
-            int auction_id = resultSet.getInt("auction_id");
-            String item_isbn = resultSet.getString("item_isbn");
-            String username_created = resultSet.getString("username_created");
-            String username_won = resultSet.getString("username_won");
-            double start_price = resultSet.getDouble("start_price");
-            double reserve_price = resultSet.getDouble("reserve_price");
-            double current_price = resultSet.getDouble("current_price");
-            Date open_date = resultSet.getDate("open_date");
-            Date close_date = resultSet.getDate("close_date");
-
-            Auction auction = new Auction(auction_id, item_isbn, username_created, username_won, start_price, reserve_price, current_price, open_date, close_date);
-
-            auctions.add(auction);
-        }
-
-        return auctions;
+        return getFromResultSet(resultSet);
     }
 
     public static int CreateNewAuction(String isbn, String username, double startPrice, double reservePrice, Date closeDate) throws SQLException {
@@ -81,46 +47,40 @@ public class AuctionTable {
         String query = String.format(AuctionQueries.GET_BYISBN, isbn);
         ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
 
-        Auction result = null;
-        while (resultSet.next() && result == null) {
-            int auction_id = resultSet.getInt("auction_id");
-            String item_isbn = resultSet.getString("item_isbn");
-            String username_created = resultSet.getString("username_created");
-            String username_won = resultSet.getString("username_won");
-            double start_price = resultSet.getDouble("start_price");
-            double reserve_price = resultSet.getDouble("reserve_price");
-            double current_price = resultSet.getDouble("current_price");
-            Date open_date = resultSet.getDate("open_date");
-            Date close_date = resultSet.getDate("close_date");
+        ArrayList<Auction> results = getFromResultSet(resultSet);
 
-            result = new Auction(auction_id, item_isbn, username_created, username_won, start_price, reserve_price, current_price,
-                    open_date, close_date);
-        }
-
-        return result;
+        return results.isEmpty() ? null : results.get(0);
     }
 
     public static Auction getById(int auctionid) throws SQLException {
         String query = String.format(AuctionQueries.GET_BYID, auctionid);
         ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
 
-        Auction result = null;
-        while (resultSet.next() && result == null) {
-            int auction_id = resultSet.getInt("auction_id");
-            String item_isbn = resultSet.getString("item_isbn");
-            String username_created = resultSet.getString("username_created");
-            String username_won = resultSet.getString("username_won");
-            double start_price = resultSet.getDouble("start_price");
-            double reserve_price = resultSet.getDouble("reserve_price");
-            double current_price = resultSet.getDouble("current_price");
-            Date open_date = resultSet.getDate("open_date");
-            Date close_date = resultSet.getDate("close_date");
+        ArrayList<Auction> results = getFromResultSet(resultSet);
 
-            result = new Auction(auction_id, item_isbn, username_created, username_won, start_price, reserve_price, current_price,
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+    public static ArrayList<Auction> getFromResultSet(ResultSet set) throws SQLException {
+        ArrayList <Auction> results = new ArrayList<>();
+
+        while (set.next()) {
+            int auction_id = set.getInt("auction_id");
+            String item_isbn = set.getString("item_isbn");
+            String username_created = set.getString("username_created");
+            String username_won = set.getString("username_won");
+            double start_price = set.getDouble("start_price");
+            double reserve_price = set.getDouble("reserve_price");
+            double current_price = set.getDouble("current_price");
+            Date open_date = set.getDate("open_date");
+            Date close_date = set.getDate("close_date");
+
+            Auction result = new Auction(auction_id, item_isbn, username_created, username_won, start_price, reserve_price, current_price,
                     open_date, close_date);
+            results.add(result);
         }
 
-        return result;
+        return results;
     }
 
 

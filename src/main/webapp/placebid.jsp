@@ -96,6 +96,12 @@
                         Auto bid?
                     </label>
                 </div>
+                <div class ="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="chk_set_alert" name="set_alert">
+                    <label class="form-check-label" for="chk_set_alert">
+                        Set alert?
+                    </label>
+                </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Place</button>
                 </div>

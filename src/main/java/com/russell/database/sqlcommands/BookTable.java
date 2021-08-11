@@ -6,6 +6,7 @@ import com.russell.entities.Book;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class BookTable {
@@ -24,8 +25,16 @@ public class BookTable {
         String query = String.format(BookQueries.GET_BYISBN, isbn);
         ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
 
-        Book result = null;
-        while (resultSet.next() && result == null) {
+        ArrayList<Book> results = getFromResultSet(resultSet);
+
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+    public static ArrayList<Book> getFromResultSet(ResultSet resultSet) throws SQLException {
+        ArrayList<Book> results = new ArrayList<>();
+
+        while (resultSet.next()) {
+            String isbn = resultSet.getString("isbn");
             String title = resultSet.getString("title");
             Book.SubCategory subcategory = Book.SubCategory.valueOf(resultSet.getString("subcategory"));
             int pages = resultSet.getInt("pages");
@@ -34,10 +43,11 @@ public class BookTable {
             String genre = resultSet.getString("genre");
             Date publicationDate = resultSet.getDate("publication_date");
 
-            result = new Book(isbn, title, subcategory, pages, author, publisher, genre, publicationDate);
+            Book result = new Book(isbn, title, subcategory, pages, author, publisher, genre, publicationDate);
+            results.add(result);
         }
 
-        return result;
+        return results;
     }
 
 }

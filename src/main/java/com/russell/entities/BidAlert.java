@@ -3,41 +3,44 @@ package com.russell.entities;
 import java.util.Date;
 
 public class BidAlert {
-
-    private Auction auction;
-    private Bid bid;
-    private User forUser;
+    private int alertId;
+    private int auctionId;
+    private int bidId;
+    private String username;
     private Date createdDate;
+    private boolean triggered;
 
-    public BidAlert(Auction auction, Bid bid, User forUser, Date createdDate) {
-        this.auction = auction;
-        this.bid = bid;
-        this.forUser = forUser;
+    public BidAlert(int alertId, int auctionId, int bidId, String username, Date createdDate, boolean triggered) {
+        this.alertId = alertId;
+        this.auctionId = auctionId;
+        this.bidId = bidId;
+        this.username = username;
         this.createdDate = createdDate;
+        this.triggered = triggered;
     }
 
-    public Auction getAuction() {
-        return auction;
+    public int getAlertId() {
+        return alertId;
     }
 
-    public void setAuction(Auction auction) {
-        this.auction = auction;
+    public void setAlertId(int alertId) {
+        this.alertId = alertId;
     }
 
-    public Bid getBid() {
-        return bid;
+    public int getAuctionId() {
+        return auctionId;
     }
 
-    public void setBid(Bid bid) {
-        this.bid = bid;
+    public void setAuctionId(int auctionId) {
+        this.auctionId = auctionId;
     }
 
-    public User getForUser() {
-        return forUser;
+    public String getUsername() {
+        return username;
     }
 
-    public void setForUser(User forUser) {
-        this.forUser = forUser;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getCreatedDate() {
@@ -46,5 +49,21 @@ public class BidAlert {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public boolean isTriggered() {
+        return triggered;
+    }
+
+    public void setTriggered(boolean triggered) {
+        this.triggered = triggered;
+    }
+
+    public int getBidId() {
+        return bidId;
+    }
+
+    public void setBidId(int bidId) {
+        this.bidId = bidId;
     }
 }

@@ -6,6 +6,7 @@ import com.russell.entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class UserTable {
@@ -31,25 +32,28 @@ public class UserTable {
     public static User LoginUser(String username, String password) throws SQLException {
         User user;
         String query = String.format(UserQueries.SELECT_USERNAME_PASSWORD, username, password);
-        ResultSet result = ApplicationDAO.runSelectQuery(query);
-        LinkedList<User> userList = new LinkedList<>();
+        ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
 
-        while (result.next()) {
-            String username_res = result.getString("username");
-            String userpass_res = result.getString("userpass");
-            String useremail_res = result.getString("useremail");
-            String irlname_res = result.getString("irlname");
-            String userrole_res = result.getString("userrole");
+        ArrayList<User> results = getFromResultSet(resultSet);
 
-            user = new User(username_res, userpass_res, useremail_res, irlname_res, userrole_res);
-            userList.add(user);
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+    public static ArrayList<User> getFromResultSet(ResultSet resultSet) throws SQLException {
+        ArrayList<User> results = new ArrayList<>();
+
+        while (resultSet.next()) {
+            String username_res = resultSet.getString("username");
+            String userpass_res = resultSet.getString("userpass");
+            String useremail_res = resultSet.getString("useremail");
+            String irlname_res = resultSet.getString("irlname");
+            String userrole_res = resultSet.getString("userrole");
+
+            User user = new User(username_res, userpass_res, useremail_res, irlname_res, userrole_res);
+            results.add(user);
         }
 
-        if (userList.isEmpty()) {
-            return null;
-        } else {
-            return userList.get(0);
-        }
+        return results;
     }
 
 }
