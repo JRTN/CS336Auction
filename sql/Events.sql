@@ -36,7 +36,3 @@ DO
 	WHERE
 		a.closed = 1
 ;
-
--- DROP EVENT IF EXISTS close_event;
--- UPDATE auction SET closed = 0, username_won = NULL;
--- SELECT * FROM auction JOIN bid using(auction_id);

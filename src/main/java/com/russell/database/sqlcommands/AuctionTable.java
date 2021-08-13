@@ -19,8 +19,15 @@ public class AuctionTable {
         return getFromResultSet(resultSet);
     }
 
-    public static ArrayList<Auction> getForUser(User user) throws SQLException {
+    public static ArrayList<Auction> getByCreator(User user) throws SQLException {
         String query = String.format(AuctionQueries.GET_BYUSERCREATED, user.getUsername());
+        ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
+
+        return getFromResultSet(resultSet);
+    }
+
+    public static ArrayList<Auction> getByWinner(User user) throws SQLException {
+        String query = String.format(AuctionQueries.GET_BYWINNER, user.getUsername());
         ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
 
         return getFromResultSet(resultSet);

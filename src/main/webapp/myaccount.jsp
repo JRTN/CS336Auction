@@ -25,7 +25,13 @@
         user = (User) session.getAttribute("currentUser");
     }
 
-    ArrayList<Auction> auctions = AuctionTable.getForUser(user);
+    ArrayList<Auction> auctions = null;
+    try {
+        auctions = AuctionTable.getByCreator(user);
+    } catch (SQLException throwables) {
+        WebError.errorPage(throwables, request, response);
+        return;
+    }
 %>
 <%
     User currentUser = (User) session.getAttribute("currentUser");
@@ -101,6 +107,33 @@
                 </p>
                 <%} %>
                 <a href="createauction.jsp" class="btn btn-primary" role="button">Create New Auction</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-3">
+        <div class="d-flex align-items-center">
+            <div class="card-body">
+                <h2 class="card-title">Won Auctions</h2>
+                <%
+                    ArrayList<Auction> wonAuctions;
+                    try {
+                        wonAuctions = AuctionTable.getByWinner(user);
+                    } catch (SQLException throwables) {
+                        WebError.errorPage(throwables, request, response);
+                        return;
+                    }
+                    for (Auction auction : wonAuctions) {
+                        int auctionId = auction.getAuctionId();
+                        String isbn = auction.getItem();
+                        double currentPrice = auction.getCurrentPrice();
+                %>
+
+                <p class="card-text">
+                    ISBN: <a href="auctionpage.jsp?auctionid=<%=auctionId%>"><%=isbn%>
+                </a> Price: <%=currentPrice%>
+                </p>
+                <%} %>
             </div>
         </div>
     </div>

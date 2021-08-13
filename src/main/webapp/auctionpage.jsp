@@ -149,7 +149,7 @@
                         Date placedDate = bid.getPlacedDate();
                 %>
                 <p class="card-text">
-                    <%=username %> Amount: <%=String.format("$%.2f", amount)%> Placed: <%=placedDate %>
+                    <%=(auction.getClosed() == 1 && auction.getCurrentPrice() == bid.getAmount() && auction.getUserWinner().equals(username)) ? "(WINNER)" : ""%><%=username %> Amount: <%=String.format("$%.2f", amount)%> Placed: <%=placedDate %>
                 </p>
                 <%} %>
                 <%

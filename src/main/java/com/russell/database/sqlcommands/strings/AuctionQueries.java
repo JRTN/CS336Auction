@@ -17,5 +17,7 @@ public interface AuctionQueries {
     String GET_BYUSERCREATED = "SELECT * FROM auction " +
             "WHERE username_created = '%s';";
 
+    String GET_BYWINNER = "SELECT * FROM auction WHERE username_won = '%s';";
+
     String GET_ALLAUCTIONS = "SELECT * FROM auction ORDER BY close_date DESC;";
 }
