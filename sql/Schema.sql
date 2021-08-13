@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS bid_alert (
     username VARCHAR(50) NOT NULL,
     created_date DATETIME NOT NULL,
     triggered TINYINT(1) NOT NULL,
+    acknowledged TINYINT(1) NOT NULL,
     PRIMARY KEY(alert_id, auction_id, bid_id),
     FOREIGN KEY(auction_id) REFERENCES auction(auction_id),
     FOREIGN KEY(bid_id) REFERENCES bid(bid_id),

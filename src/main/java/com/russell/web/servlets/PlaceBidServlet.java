@@ -1,6 +1,5 @@
 package com.russell.web.servlets;
 
-import com.russell.database.sqlcommands.AuctionTable;
 import com.russell.database.sqlcommands.AutoBidTable;
 import com.russell.database.sqlcommands.BidTable;
 import com.russell.entities.Auction;
@@ -42,7 +41,6 @@ public class PlaceBidServlet extends HttpServlet {
 
         try {
             BidTable.createNewBid(auction.getAuctionId(), user.getUsername(), bidAmount, new Date());
-            AuctionTable.updateAuctionPrice(auction.getAuctionId(), bidAmount);
         } catch (SQLException throwables) {
             WebError.errorPage(throwables, request, response);
             return;
@@ -54,6 +52,12 @@ public class PlaceBidServlet extends HttpServlet {
             double currentBid = bidAmount;
             double upperLimit = Double.parseDouble(request.getParameter("bid_maximum"));
             double increment = Double.parseDouble(request.getParameter("bid_increment"));
+
+            if(currentBid >= upperLimit) {
+                request.setAttribute("createResult", "Automatic upper limit must be greater than the current bid.");
+                request.getRequestDispatcher("/placebid.jsp?auctionid=" + auction.getAuctionId()).forward(request, response);
+                return;
+            }
 
             try {
                 AutoBidTable.insertNewAutobid(auctionId, usernameBidder, currentBid, upperLimit, increment);
