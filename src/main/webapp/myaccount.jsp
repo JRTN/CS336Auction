@@ -19,13 +19,13 @@
     User user;
     if (session.getAttribute("currentUser") == null) {
         out.println("Nobody is logged in.");
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/notfound.jsp").forward(request, response);
         return;
     } else {
         user = (User) session.getAttribute("currentUser");
     }
 
-    ArrayList<Auction> auctions = null;
+    ArrayList<Auction> auctions;
     try {
         auctions = AuctionTable.getByCreator(user);
     } catch (SQLException throwables) {

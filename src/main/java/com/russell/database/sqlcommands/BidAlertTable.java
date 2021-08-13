@@ -20,7 +20,7 @@ public class BidAlertTable {
         return ApplicationDAO.runChangeQuery(insertQuery);
     }
 
-    public static int setTriggerForBid(int bidId, int val) throws SQLException {
+    public static int setTriggerForBidAlert(int bidId, int val) throws SQLException {
         String updateQuery = String.format(BidAlertQueries.TRIGGER_BYBIDID, bidId, val);
 
         return ApplicationDAO.runChangeQuery(updateQuery);

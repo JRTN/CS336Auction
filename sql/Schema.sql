@@ -82,6 +82,18 @@ CREATE TABLE IF NOT EXISTS bid (
     FOREIGN KEY(username_bidder) REFERENCES users(username)
 );
 
+CREATE TABLE IF NOT EXISTS autobid (
+	autobid_id INT NOT NULL AUTO_INCREMENT,
+    auction_id INT NOT NULL,
+    username_bidder VARCHAR(50) NOT NULL,
+    current_bid DOUBLE NOT NULL,
+    upper_limit DOUBLE NOT NULL,
+    increment DOUBLE NOT NULL,
+    PRIMARY KEY(autobid_id), 
+    FOREIGN KEY(auction_id) REFERENCES auction(auction_id),
+    FOREIGN KEY(username_bidder) REFERENCES users(username)
+);
+
 CREATE TABLE IF NOT EXISTS bid_alert (
 	alert_id INT NOT NULL AUTO_INCREMENT,
     auction_id INT NOT NULL,

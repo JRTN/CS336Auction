@@ -16,7 +16,7 @@
     User user = (User) session.getAttribute("currentUser");
 
     if (user == null) {
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
         return;
     }
 %>

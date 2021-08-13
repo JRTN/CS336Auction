@@ -34,5 +34,6 @@ DO
             LIMIT 1
         )
 	WHERE
-		a.closed = 1
+		a.closed = 1 AND
+        a.current_price >= a.reserve_price
 ;
