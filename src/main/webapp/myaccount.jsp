@@ -1,8 +1,13 @@
 <%@ page import="com.russell.entities.User" %>
 <%@ page import="com.russell.entities.Auction" %>
 <%@ page import="com.russell.database.sqlcommands.AuctionTable" %>
-<%@ page import="com.russell.entities.Book" %>
+<%@ page import="com.russell.entities.BidAlert" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.russell.database.sqlcommands.BidAlertTable" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="com.russell.web.WebError" %>
+<%@ page import="com.russell.entities.Bid" %>
+<%@ page import="com.russell.database.sqlcommands.BidTable" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -96,6 +101,49 @@
                 </p>
                 <%} %>
                 <a href="createauction.jsp" class="btn btn-primary" role="button">Create New Auction</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-3">
+        <div class="d-flex align-items-center">
+            <div class="card-body">
+                <h2 class="card-title">Manual Bid Alerts</h2>
+                <%
+                    ArrayList<BidAlert> alerts;
+                    try {
+                        alerts = BidAlertTable.getTriggeredByUsername(user.getUsername());
+                    } catch (SQLException throwables) {
+                        WebError.errorPage(throwables, request, response);
+                        return;
+                    }
+
+                    for(BidAlert alert : alerts) {
+                        int auctionId = alert.getAuctionId();
+                        Auction auction;
+                        try {
+                            auction = AuctionTable.getById(auctionId);
+                        } catch (SQLException throwables) {
+                            WebError.errorPage(throwables, request, response);
+                            return;
+                        }
+                        Bid bid;
+                        try {
+                            bid = BidTable.getByBidId(alert.getBidId());
+                        } catch (SQLException throwables) {
+                            WebError.errorPage(throwables, request, response);
+                            return;
+                        }
+
+
+                %>
+
+                <p class="card-text">
+                    Your bid for <a href="auctionpage.jsp?auctionid=<%=auctionId%>"><%=String.format("$%.2f", bid.getAmount())%></a> has been beaten!
+                </p>
+                <a href="AcknowledgeAlertServlet?alertid=<%=alert.getAlertId()%>" class="btn btn-primary" role="button">Acknowledge</a>
+                <%} %>
+
             </div>
         </div>
     </div>

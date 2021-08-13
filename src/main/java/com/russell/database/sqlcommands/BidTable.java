@@ -6,10 +6,19 @@ import com.russell.entities.Bid;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class BidTable {
+
+    public static Bid getByBidId(int bidId) throws SQLException {
+        String query = String.format(BidQueries.GET_BYBIDID, bidId);
+        ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
+        ArrayList<Bid> bids = getFromResultSet(resultSet);
+
+        return bids.isEmpty() ? null : bids.get(0);
+    }
 
     public static ArrayList<Bid> getByAuctionId(int auctionId) throws SQLException {
         String query = String.format(BidQueries.GET_BYAUCTIONID, auctionId);
@@ -38,7 +47,7 @@ public class BidTable {
             int auction_id = resultSet.getInt("auction_id");
             String username_bidder = resultSet.getString("username_bidder");
             double amount = resultSet.getDouble("amount");
-            Date placed_date = resultSet.getDate("placed_date");
+            Timestamp placed_date = resultSet.getTimestamp("placed_date");
 
             Bid result = new Bid(auction_id, username_bidder, amount, placed_date);
 

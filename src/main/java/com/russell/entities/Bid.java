@@ -1,14 +1,15 @@
 package com.russell.entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Bid {
     private int auction_id;
     private String userBidder;
     private double amount;
-    private Date placedDate;
+    private Timestamp placedDate;
 
-    public Bid(int auction_id, String userBidder, double amount, Date placedDate) {
+    public Bid(int auction_id, String userBidder, double amount, Timestamp placedDate) {
         this.auction_id = auction_id;
         this.userBidder = userBidder;
         this.amount = amount;
@@ -43,7 +44,7 @@ public class Bid {
         return placedDate;
     }
 
-    public void setPlacedDate(Date placedDate) {
+    public void setPlacedDate(Timestamp placedDate) {
         this.placedDate = placedDate;
     }
 }

@@ -91,7 +91,7 @@
 <div class="card p-3">
     <div class="d-flex align-items-center">
         <div class="card-body">
-            <a href="auctionpage.jsp?auctionid=<%=auction.getAuctionId()%>"><h2 class="card-title"><%=book.getTitle()%>
+            <a href="auctionpage.jsp?auctionid=<%=auction.getAuctionId()%>"><h2 class="card-title"><%=book.getTitle()%><%=(auction.getClosed() == 0 ? "" : "(CLOSED)")%>
             </h2></a>
             <p class="card-text">Price: $<%=String.format("%.2f", auction.getCurrentPrice())%>
             </p>

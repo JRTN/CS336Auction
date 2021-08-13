@@ -6,6 +6,7 @@ import com.russell.entities.BidAlert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,6 +33,13 @@ public class BidAlertTable {
         return getFromResultSet(resultSet);
     }
 
+    public static ArrayList<BidAlert> getTriggeredByUsername(String username) throws SQLException {
+        String query = String.format(BidAlertQueries.GET_TRIGGERED_BYUSERNAME, username);
+        ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
+
+        return getFromResultSet(resultSet);
+    }
+
     public static ArrayList<BidAlert> getByAuctionId(int auctionId) throws SQLException {
         String query = String.format(BidAlertQueries.GET_BYAUCTIONID, auctionId);
         ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
@@ -46,7 +54,7 @@ public class BidAlertTable {
             int auctionId = set.getInt("auction_id");
             int bidId = set.getInt("bid_id");
             String username = set.getString("username");
-            Date placedDate = set.getDate("placed_date");
+            Timestamp placedDate = set.getTimestamp("placed_date");
             int triggered = set.getInt("triggered");
 
             BidAlert alert = new BidAlert(alertId, auctionId, bidId, username, placedDate, triggered == 1);

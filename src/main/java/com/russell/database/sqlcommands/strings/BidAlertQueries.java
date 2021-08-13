@@ -4,6 +4,8 @@ public interface BidAlertQueries {
 
     String GET_BYUSERNAME = "SELECT * FROM bid_alert WHERE username = '%s';";
 
+    String GET_TRIGGERED_BYUSERNAME = "SELECT * FROM bid_alert WHERE username = '%s' AND triggered = 1;";
+
     String GET_BYAUCTIONID ="SELECT * FROM bid_alert WHERE auction_id = %d;";
 
     String INSERT_NEWBIDALERT = "INSERT INTO bid_alert " +

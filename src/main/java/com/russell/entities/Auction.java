@@ -1,5 +1,6 @@
 package com.russell.entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Auction {
@@ -11,11 +12,12 @@ public class Auction {
     private double startPrice;
     private double reservePrice;
     private double currentPrice;
-    private Date openDate;
-    private Date closeDate;
+    private Timestamp openDate;
+    private Timestamp closeDate;
+    private int closed;
 
     public Auction(int auctionId, String item, String userCreated, String userWinner, double startPrice, double reservePrice, double currentPrice,
-                   Date openDate, Date closeDate) {
+                   Timestamp openDate, Timestamp closeDate, int closed) {
         this.auctionId = auctionId;
         this.item = item;
         this.userCreated = userCreated;
@@ -25,6 +27,15 @@ public class Auction {
         this.currentPrice = currentPrice;
         this.openDate = openDate;
         this.closeDate = closeDate;
+        this.closed = closed;
+    }
+
+    public int getClosed() {
+        return closed;
+    }
+
+    public void setClosed(int closed) {
+        this.closed = closed;
     }
 
     public int getAuctionId() {
@@ -87,7 +98,7 @@ public class Auction {
         return openDate;
     }
 
-    public void setOpenDate(Date openDate) {
+    public void setOpenDate(Timestamp openDate) {
         this.openDate = openDate;
     }
 
@@ -95,7 +106,7 @@ public class Auction {
         return closeDate;
     }
 
-    public void setCloseDate(Date closeDate) {
+    public void setCloseDate(Timestamp closeDate) {
         this.closeDate = closeDate;
     }
 }

@@ -1,5 +1,6 @@
 package com.russell.entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class BidAlert {
@@ -7,10 +8,10 @@ public class BidAlert {
     private int auctionId;
     private int bidId;
     private String username;
-    private Date createdDate;
+    private Timestamp createdDate;
     private boolean triggered;
 
-    public BidAlert(int alertId, int auctionId, int bidId, String username, Date createdDate, boolean triggered) {
+    public BidAlert(int alertId, int auctionId, int bidId, String username, Timestamp createdDate, boolean triggered) {
         this.alertId = alertId;
         this.auctionId = auctionId;
         this.bidId = bidId;
@@ -47,7 +48,7 @@ public class BidAlert {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
     }
 

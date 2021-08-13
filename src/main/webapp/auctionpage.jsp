@@ -109,7 +109,7 @@
     <div class="card p-3">
         <div class="d-flex align-items-center">
             <div class="card-body">
-                <h1 class="card-title"><%=book.getTitle() %>
+                <h1 class="card-title"><%=book.getTitle() %><%=(auction.getClosed() == 0 ? "" : "(CLOSED)")%>
                 </h1>
                 <h2 class="card-text"><%=book.getAuthor() %>
                 </h2>
@@ -149,11 +149,11 @@
                         Date placedDate = bid.getPlacedDate();
                 %>
                 <p class="card-text">
-                    <%=username %> Amount: <%=String.format("%.2f", amount)%> Placed: <%=placedDate %>
+                    <%=username %> Amount: <%=String.format("$%.2f", amount)%> Placed: <%=placedDate %>
                 </p>
                 <%} %>
                 <%
-                    if (currentUser != null && !currentUser.getUsername().equals(auction.getUserCreated())) {
+                    if (auction.getClosed() == 0 && currentUser != null && !currentUser.getUsername().equals(auction.getUserCreated())) {
                 %>
                 <a href="placebid.jsp?auctionid=<%=auctionId %>" class="btn btn-primary" role="button">Place Bid</a>
                 <%

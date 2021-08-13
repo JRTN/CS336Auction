@@ -7,6 +7,7 @@ import com.russell.entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -72,11 +73,12 @@ public class AuctionTable {
             double start_price = set.getDouble("start_price");
             double reserve_price = set.getDouble("reserve_price");
             double current_price = set.getDouble("current_price");
-            Date open_date = set.getDate("open_date");
-            Date close_date = set.getDate("close_date");
+            Timestamp open_date = set.getTimestamp("open_date");
+            Timestamp close_date = set.getTimestamp("close_date");
+            int closed = set.getInt("closed");
 
             Auction result = new Auction(auction_id, item_isbn, username_created, username_won, start_price, reserve_price, current_price,
-                    open_date, close_date);
+                    open_date, close_date, closed);
             results.add(result);
         }
 
