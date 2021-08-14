@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Error</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 <%
@@ -59,5 +60,6 @@
 </nav>
 <h1>Internal Error</h1>
 <label id="lbl_error">${errorBody}</label>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

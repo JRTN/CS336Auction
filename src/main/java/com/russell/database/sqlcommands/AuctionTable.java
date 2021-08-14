@@ -40,7 +40,7 @@ public class AuctionTable {
 
         String queryInsert = String.format(AuctionQueries.INSERT_NEWAUCTION, isbn, username,
                 startPrice, reservePrice, currentPrice, ApplicationDAO.getDateTimeString(openDate),
-                ApplicationDAO.getDateTimeString(closeDate));
+                ApplicationDAO.getDateTimeString(closeDate), 0);
 
         return ApplicationDAO.runChangeQuery(queryInsert);
     }
