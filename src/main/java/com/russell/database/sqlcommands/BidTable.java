@@ -40,16 +40,23 @@ public class BidTable {
         return ApplicationDAO.runChangeQuery(insertQuery);
     }
 
+    public static ArrayList<Bid> runCustomQuery(String query) throws SQLException {
+        ResultSet resultSet = ApplicationDAO.runSelectQuery(query);
+
+        return getFromResultSet(resultSet);
+    }
+
     public static ArrayList<Bid> getFromResultSet(ResultSet resultSet) throws SQLException {
         ArrayList<Bid> results = new ArrayList<>();
 
         while (resultSet.next()) {
+            int bid_id = resultSet.getInt("bid_id");
             int auction_id = resultSet.getInt("auction_id");
             String username_bidder = resultSet.getString("username_bidder");
             double amount = resultSet.getDouble("amount");
             Timestamp placed_date = resultSet.getTimestamp("placed_date");
 
-            Bid result = new Bid(auction_id, username_bidder, amount, placed_date);
+            Bid result = new Bid(bid_id, auction_id, username_bidder, amount, placed_date);
 
             results.add(result);
         }

@@ -12,16 +12,16 @@ import java.util.Date;
 
 public class BidAlertTable {
 
-    public static int createNewBidAlert(int auctionId, int bidId, String username, Date createdDate, boolean triggered) throws SQLException {
+    public static int createNewBidAlert(int auctionId, int bidId, String username, Date createdDate, boolean triggered, boolean acknowledged) throws SQLException {
         String insertQuery = String.format(BidAlertQueries.INSERT_NEWBIDALERT,
                                             auctionId, bidId, username,
-                                            ApplicationDAO.getDateTimeString(createdDate), triggered ? 1 : 0);
+                                            ApplicationDAO.getDateTimeString(createdDate), triggered ? 1 : 0, acknowledged ? 1 : 0);
 
         return ApplicationDAO.runChangeQuery(insertQuery);
     }
 
-    public static int setTriggerForBidAlert(int bidId, int val) throws SQLException {
-        String updateQuery = String.format(BidAlertQueries.TRIGGER_BYBIDID, bidId, val);
+    public static int acknowledgeAlert(int bidId) throws SQLException {
+        String updateQuery = String.format(BidAlertQueries.ACKNOWLEDGE_ALERT, bidId);
 
         return ApplicationDAO.runChangeQuery(updateQuery);
     }
@@ -54,10 +54,11 @@ public class BidAlertTable {
             int auctionId = set.getInt("auction_id");
             int bidId = set.getInt("bid_id");
             String username = set.getString("username");
-            Timestamp placedDate = set.getTimestamp("placed_date");
+            Timestamp placedDate = set.getTimestamp("created_date");
             int triggered = set.getInt("triggered");
+            int acknowledged = set.getInt("acknowledged");
 
-            BidAlert alert = new BidAlert(alertId, auctionId, bidId, username, placedDate, triggered == 1);
+            BidAlert alert = new BidAlert(alertId, auctionId, bidId, username, placedDate, triggered == 1, acknowledged == 1);
             results.add(alert);
         }
 

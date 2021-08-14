@@ -1,8 +1,10 @@
 package com.russell.web.servlets;
 
 import com.russell.database.sqlcommands.AutoBidTable;
+import com.russell.database.sqlcommands.BidAlertTable;
 import com.russell.database.sqlcommands.BidTable;
 import com.russell.entities.Auction;
+import com.russell.entities.Bid;
 import com.russell.entities.User;
 import com.russell.web.WebError;
 
@@ -29,7 +31,9 @@ public class PlaceBidServlet extends HttpServlet {
 
         double bidAmount = Double.parseDouble(request.getParameter("bid_amount"));
         String chkAuto = request.getParameter("auto_increment");
-        boolean autoBid = chkAuto == null;
+        boolean autoBid = chkAuto != null;
+        String chkAlert = request.getParameter("set_alert");
+        boolean alert = chkAlert != null;
 
         if(bidAmount < auction.getCurrentPrice()) {
             request.setAttribute("createResult", String.format("You must bid an amount higher than $%.2f", auction.getCurrentPrice()));
@@ -61,6 +65,25 @@ public class PlaceBidServlet extends HttpServlet {
 
             try {
                 AutoBidTable.insertNewAutobid(auctionId, usernameBidder, currentBid, upperLimit, increment);
+            } catch (SQLException throwables) {
+                WebError.errorPage(throwables, request, response);
+                return;
+            }
+
+        }
+
+        if(alert) {
+            Bid bid;
+            try {
+                bid = BidTable.runCustomQuery(String.format("SELECT * FROM bid WHERE auction_id = %d AND username_bidder = '%s' AND amount = %f;",
+                        auction.getAuctionId(), user.getUsername(), bidAmount)).get(0);
+            } catch (SQLException throwables) {
+                WebError.errorPage(throwables, request, response);
+                return;
+            }
+
+            try {
+                BidAlertTable.createNewBidAlert(auction.getAuctionId(), bid.getBid_id(), bid.getUserBidder(), new Date(), false, false);
             } catch (SQLException throwables) {
                 WebError.errorPage(throwables, request, response);
                 return;

@@ -56,4 +56,24 @@
         <servlet-name>PlaceBidServlet</servlet-name>
         <url-pattern>/PlaceBidServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description>Servlet that handles logging out</description>
+        <display-name>LogoutServlet</display-name>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.russell.web.servlets.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description>Servlet that handles acknowledging alerts</description>
+        <display-name>AcknowledgeAlertServlet</display-name>
+        <servlet-name>AcknowledgeAlertServlet</servlet-name>
+        <servlet-class>com.russell.web.servlets.AcknowledgeAlertServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AcknowledgeAlertServlet</servlet-name>
+        <url-pattern>/AcknowledgeAlertServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

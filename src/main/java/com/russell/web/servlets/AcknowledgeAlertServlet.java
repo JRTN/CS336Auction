@@ -20,7 +20,7 @@ public class AcknowledgeAlertServlet extends HttpServlet {
         int alertId = Integer.parseInt(request.getParameter("alertid"));
 
         try {
-            BidAlertTable.setTriggerForBidAlert(alertId, 0);
+            BidAlertTable.acknowledgeAlert(alertId);
         } catch (SQLException throwables) {
             WebError.errorPage(throwables, request, response);
             return;

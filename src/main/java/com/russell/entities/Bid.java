@@ -4,16 +4,26 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class Bid {
+    private int bid_id;
     private int auction_id;
     private String userBidder;
     private double amount;
     private Timestamp placedDate;
 
-    public Bid(int auction_id, String userBidder, double amount, Timestamp placedDate) {
+    public Bid(int bid_id, int auction_id, String userBidder, double amount, Timestamp placedDate) {
+        this.bid_id = bid_id;
         this.auction_id = auction_id;
         this.userBidder = userBidder;
         this.amount = amount;
         this.placedDate = placedDate;
+    }
+
+    public int getBid_id() {
+        return bid_id;
+    }
+
+    public void setBid_id(int bid_id) {
+        this.bid_id = bid_id;
     }
 
     public int getAuction_id() {

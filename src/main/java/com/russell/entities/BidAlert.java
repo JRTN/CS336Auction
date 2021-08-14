@@ -10,14 +10,25 @@ public class BidAlert {
     private String username;
     private Timestamp createdDate;
     private boolean triggered;
+    private boolean acknowledged;
 
-    public BidAlert(int alertId, int auctionId, int bidId, String username, Timestamp createdDate, boolean triggered) {
+    public BidAlert(int alertId, int auctionId, int bidId, String username,
+                    Timestamp createdDate, boolean triggered, boolean acknowledged) {
         this.alertId = alertId;
         this.auctionId = auctionId;
         this.bidId = bidId;
         this.username = username;
         this.createdDate = createdDate;
         this.triggered = triggered;
+        this.acknowledged = acknowledged;
+    }
+
+    public boolean isAcknowledged() {
+        return acknowledged;
+    }
+
+    public void setAcknowledged(boolean acknowledged) {
+        this.acknowledged = acknowledged;
     }
 
     public int getAlertId() {

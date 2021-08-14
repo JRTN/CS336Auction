@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS auction (
     FOREIGN KEY(item_isbn) REFERENCES book(isbn)
 );
 
--- use question_id and username_posted as PK so that qid is unique to usernames, not table as a whole
 CREATE TABLE IF NOT EXISTS question (
 	question_id INT NOT NULL AUTO_INCREMENT,
     username_posted VARCHAR(50) NOT NULL,
